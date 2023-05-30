@@ -2,6 +2,9 @@
 
 namespace Config;
 
+use App\Controllers\Admin\Home as AdminHome;
+use \App\Controllers\Clients\Home as ClientHome;
+use CodeIgniter\Exceptions\PageNotFoundException;
 // Create a new instance of our RouteCollection class.
 $routes = Services::routes();
 
@@ -29,18 +32,34 @@ $routes->set404Override();
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-$routes->group('/', ['namespace' => 'App\Controllers\Admin'], function ($routes) {
-    $routes->get('', 'Home::index');
-});
+$routes->get('/', 'Home::index', ['filter' => 'noauth:home']);
 
 $routes->group('auth', ['namespace' => 'App\Controllers\Auth'], function ($routes) {
-    $routes->get('login', 'Login::index', ['as' => 'login']);
-    $routes->post('check', 'Login::signin', ['as' => 'signin']);
+    $routes->get('login', 'Login::index', ['as' => 'login', 'filter' => 'noauth']);
+    $routes->post('check', 'Login::signin', ['as' => 'signin', 'filter' => 'noauth']);
     $routes->get('signout', 'Login::signout', ['as' => 'signout']);
+    // DEFAULT
+    $routes->get('', function () {
+        throw PageNotFoundException::forPageNotFound();
+    });
 });
 
-$routes->group('admin', ['namespace' => 'App\Controllers\Admin'], function ($routes) {
-    $routes->get('', 'Home::index', ['as' => 'home']);
+$routes->group('dashboard', ['filter' => 'auth'], function ($routes) {
+
+    // SHARE
+    $routes->get('home', function () {
+        if (session()->get('username') == 'admin') {
+            $AdminHome = new AdminHome();
+            return $AdminHome->index();
+        } else {
+            $AdminHome = new ClientHome();
+            return $AdminHome->index();
+        }
+    }, ['as' => 'home']);
+    // DEFAULT
+    $routes->get('', function () {
+        throw PageNotFoundException::forPageNotFound();
+    });
 });
 
 /*
