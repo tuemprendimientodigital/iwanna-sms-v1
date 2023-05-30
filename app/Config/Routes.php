@@ -32,6 +32,17 @@ $routes->set404Override();
 $routes->group('/', ['namespace' => 'App\Controllers\Admin'], function ($routes) {
     $routes->get('', 'Home::index');
 });
+
+$routes->group('auth', ['namespace' => 'App\Controllers\Auth'], function ($routes) {
+    $routes->get('login', 'Login::index', ['as' => 'login']);
+    $routes->post('check', 'Login::signin', ['as' => 'signin']);
+    $routes->get('signout', 'Login::signout', ['as' => 'signout']);
+});
+
+$routes->group('admin', ['namespace' => 'App\Controllers\Admin'], function ($routes) {
+    $routes->get('', 'Home::index', ['as' => 'home']);
+});
+
 /*
  * --------------------------------------------------------------------
  * Additional Routing
