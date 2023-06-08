@@ -56,6 +56,16 @@ $routes->group('dashboard', ['filter' => 'auth'], function ($routes) {
             return $AdminHome->index();
         }
     }, ['as' => 'home']);
+
+    $routes->post('home/get', function () {
+        if (session()->get('username') != 'admin') {
+            $AdminHome = new ClientHome();
+            return $AdminHome->get();
+        } else {
+            throw PageNotFoundException::forPageNotFound();
+        }
+    }, ['as' => 'home/get']);
+
     // DEFAULT
     $routes->get('', function () {
         throw PageNotFoundException::forPageNotFound();

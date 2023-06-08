@@ -10,4 +10,12 @@ class Home extends BaseController
     {
         return view('clients/home/index');
     }
+
+    function get()
+    {
+        $dp = model('HomeModel');
+        $data['getIncomingToday'] = $dp->getIncomingToday();
+        $data['getDevices'] = $dp->getDevicesFilter();
+        echo json_encode($data);
+    }
 }
