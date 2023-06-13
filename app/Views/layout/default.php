@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>::.. <?= $this->renderSection('title'); ?> | DASHBOARD ..::</title>
     <?= $this->include('layout/css'); ?>
+    <?= $this->renderSection('css') ?>
     <?= $this->include('layout/js'); ?>
     <script>
         const URL_HOST = "<?= base_url(); ?>";

@@ -1,0 +1,50 @@
+/* GENERAL */
+table {
+  top: 20px;
+}
+
+table.floatThead-table {
+  border-top: none;
+  border-bottom: none;
+  background-color: #fff;
+}
+
+thead {
+  background: #111b54;
+  position: sticky;
+  top: 0; /* Don't forget this, required for the stickiness */
+  box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.4);
+  color: white;
+}
+
+/* Ensure that the demo table scrolls */
+th,
+td,
+tr {
+  white-space: nowrap;
+}
+
+.table-hover tbody tr:hover td,
+.table-hover tbody tr:hover th {
+  background-color: #7885d1;
+  color: white;
+}
+
+div.dataTables_wrapper {
+  width: 100%;
+  margin: 0 auto;
+  font-family: Verdana, Tahoma, Arial, Helvetica, sans-serif;
+  font-size: 15px;
+}
+
+/* OTHER CONFIGS */
+::-webkit-scrollbar {
+  -webkit-appearance: none;
+  width: 10px;
+  background: #f1f3f5;
+  border-left: 1px solid darken(#f1f3f5, 10%);
+}
+
+::-webkit-scrollbar-thumb {
+  background: darken(#f1f3f5, 20%);
+}

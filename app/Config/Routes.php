@@ -4,6 +4,7 @@ namespace Config;
 
 use App\Controllers\Admin\Home as AdminHome;
 use \App\Controllers\Clients\Home as ClientHome;
+use \App\Controllers\Clients\Ports;
 use CodeIgniter\Exceptions\PageNotFoundException;
 // Create a new instance of our RouteCollection class.
 $routes = Services::routes();
@@ -65,6 +66,25 @@ $routes->group('dashboard', ['filter' => 'auth'], function ($routes) {
             throw PageNotFoundException::forPageNotFound();
         }
     }, ['as' => 'home/get']);
+
+    // CLIENTS
+    $routes->get('devices/ports/(:num)', function ($id) {
+        if (session()->get('username') != 'admin') {
+            $Ports = new Ports();
+            return $Ports->index($id);
+        } else {
+            throw PageNotFoundException::forPageNotFound();
+        }
+    }, ['as' => 'ports']);
+
+    $routes->post('devices/ports/get/(:num)', function ($id) {
+        if (session()->get('username') != 'admin') {
+            $Ports = new Ports();
+            return $Ports->getAll($id);
+        } else {
+            throw PageNotFoundException::forPageNotFound();
+        }
+    }, ['as' => 'ports/get']);
 
     // DEFAULT
     $routes->get('', function () {
