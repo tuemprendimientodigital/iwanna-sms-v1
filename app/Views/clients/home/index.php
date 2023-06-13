@@ -7,7 +7,7 @@ Home
 <script src="<?= base_url('public/js/clients/home/configHome.js'); ?>"></script>
 <?= $this->endSection() ?>
 <?= $this->section('content') ?>
-<?= $this->include('layout/nav'); ?>
+<?= $this->include('clients/layout/nav'); ?>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->

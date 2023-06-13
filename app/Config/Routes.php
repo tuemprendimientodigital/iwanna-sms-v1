@@ -4,6 +4,7 @@ namespace Config;
 
 use App\Controllers\Admin\Home as AdminHome;
 use \App\Controllers\Clients\Home as ClientHome;
+use \App\Controllers\Clients\Devices as ClientDevices;
 use \App\Controllers\Clients\Ports;
 use CodeIgniter\Exceptions\PageNotFoundException;
 // Create a new instance of our RouteCollection class.
@@ -66,6 +67,24 @@ $routes->group('dashboard', ['filter' => 'auth'], function ($routes) {
             throw PageNotFoundException::forPageNotFound();
         }
     }, ['as' => 'home/get']);
+    // SHARE - DEVICES
+    $routes->get('devices', function () {
+        if (session()->get('username') != 'admin') {
+            $ClientDevices = new ClientDevices();
+            return $ClientDevices->index();
+        } else {
+            throw PageNotFoundException::forPageNotFound();
+        }
+    }, ['as' => 'devices']);
+
+    $routes->post('devices/get', function () {
+        if (session()->get('username') != 'admin') {
+            $ClientDevices = new ClientDevices();
+            return $ClientDevices->getAll();
+        } else {
+            throw PageNotFoundException::forPageNotFound();
+        }
+    }, ['as' => 'devices/get']);
 
     // CLIENTS
     $routes->get('devices/ports/(:num)', function ($id) {

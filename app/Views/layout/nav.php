@@ -10,6 +10,7 @@
                 <li class="nav-item">
                     <a href="<?= base_url('dashboard/home'); ?>" class="nav-link">Home</a>
                 </li>
+                <?= $this->renderSection('list-nav') ?>
             </ul>
         </div>
         <ul class="order-1 order-md-3 navbar-nav navbar-no-expand ml-auto">

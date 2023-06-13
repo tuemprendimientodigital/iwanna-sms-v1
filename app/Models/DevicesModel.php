@@ -14,4 +14,14 @@ class DevicesModel extends Model
             ->where('user_id', $id_user)->get();
         return $query->getFirstRow();
     }
+
+    function getAllDevices()
+    {
+        $id_user = session('id_user');
+        $query = $this->db->table('devices')
+            ->where('user_id', $id_user)
+            ->orderBy('id', 'desc')
+            ->get();
+        return $query->getResult();
+    }
 }
