@@ -5,5 +5,9 @@ Home
 <?= $this->endSection() ?>
 <?= $this->section('content') ?>
 <?= $this->include('layout/nav'); ?>
-<h1>Welcome <?= session()->get('username') ?></h1>
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <h1>Welcome <?= session()->get('username') ?></h1>
+</div>
+<!-- /.content-wrapper -->
 <?= $this->endSection() ?>

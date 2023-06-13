@@ -26,6 +26,7 @@
 <body class="hold-transition layout-top-nav layout-footer-fixed">
     <div class="wrapper">
         <?= $this->renderSection('content') ?>
+        <?= $this->include('layout/footer'); ?>
     </div>
 </body>
 
