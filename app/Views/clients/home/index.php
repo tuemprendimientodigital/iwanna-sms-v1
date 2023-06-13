@@ -4,7 +4,7 @@
 Home
 <?= $this->endSection() ?>
 <?= $this->section('js') ?>
-<script src="<?php echo base_url('public/js/clients/home/configHome.js'); ?>"></script>
+<script src="<?= base_url('public/js/clients/home/configHome.js'); ?>"></script>
 <?= $this->endSection() ?>
 <?= $this->section('content') ?>
 <?= $this->include('layout/nav'); ?>

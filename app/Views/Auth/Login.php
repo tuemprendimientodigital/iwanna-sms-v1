@@ -49,7 +49,6 @@
                             <!-- /.col -->
                         </div>
                     </form>
-
                 </div>
                 <!-- /.card-body -->
             </div>

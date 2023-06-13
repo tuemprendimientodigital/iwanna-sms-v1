@@ -9,7 +9,7 @@
     <?= $this->include('layout/css'); ?>
     <?= $this->include('layout/js'); ?>
     <script>
-        const URL_HOST = "<?php echo base_url(); ?>";
+        const URL_HOST = "<?= base_url(); ?>";
         // AJAX
         const QUERY_AJAX = (dataQuery) => {
             return $.ajax({

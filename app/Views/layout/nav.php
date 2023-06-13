@@ -8,7 +8,7 @@
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a href="<?php echo base_url(); ?>dashboard/home" class="nav-link">Home</a>
+                    <a href="<?= base_url('dashboard/home'); ?>" class="nav-link">Home</a>
                 </li>
             </ul>
         </div>
