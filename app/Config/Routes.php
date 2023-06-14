@@ -6,7 +6,10 @@ use App\Controllers\Admin\Home as AdminHome;
 use \App\Controllers\Clients\Home as ClientHome;
 use \App\Controllers\Clients\Devices as ClientDevices;
 use \App\Controllers\Clients\Ports;
+use App\Controllers\Clients\Transactions as ClientsTransactions;
 use CodeIgniter\Exceptions\PageNotFoundException;
+use Transactions;
+
 // Create a new instance of our RouteCollection class.
 $routes = Services::routes();
 
@@ -87,6 +90,25 @@ $routes->group('dashboard', ['filter' => 'auth'], function ($routes) {
     }, ['as' => 'devices/get']);
 
     // CLIENTS
+    $routes->get('reports/transactions', function () {
+        if (session()->get('username') != 'admin') {
+            $ClientsTransactions = new ClientsTransactions();
+            return $ClientsTransactions->index();
+        } else {
+            throw PageNotFoundException::forPageNotFound();
+        }
+    }, ['as' => 'reports/transactions']);
+
+    // REPORTS - TRANSACTIONS
+    $routes->post('reports/transactions/get', function () {
+        if (session()->get('username') != 'admin') {
+            $ClientsTransactions = new ClientsTransactions();
+            return $ClientsTransactions->getAll();
+        } else {
+            throw PageNotFoundException::forPageNotFound();
+        }
+    }, ['as' => 'reports/transactions/get']);
+
     $routes->get('devices/ports/(:num)', function ($id) {
         if (session()->get('username') != 'admin') {
             $Ports = new Ports();
